@@ -31,6 +31,8 @@ public class PublishCallback implements CallbackExecutor {
                     .callAsync(context.sender);
         } catch (StoryPublisherService.StoryNotFoundException e) {
             context.answerAsAlert("История #" + feedbackId + " удалена либо уже опубликована!").callAsync(context.sender);
+        } catch (StoryPublisherService.NotAStoryException e) {
+            context.answerAsAlert("Фидбек #" + feedbackId + " - не история!").callAsync(context.sender);
         }
     }
 

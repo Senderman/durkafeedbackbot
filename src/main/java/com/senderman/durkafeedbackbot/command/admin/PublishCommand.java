@@ -36,6 +36,9 @@ public class PublishCommand implements CommandExecutor {
         } catch (StoryPublisherService.StoryNotFoundException e) {
             context.replyToMessage("История #" + feedbackId + " удалена либо уже опубликована!")
                     .callAsync(context.sender);
+        } catch (StoryPublisherService.NotAStoryException e) {
+            context.replyToMessage("Фидбек #" + feedbackId + " - не история!")
+                    .callAsync(context.sender);
         }
     }
 }
