@@ -11,5 +11,5 @@ logging:
 username: ${username}
 token: ${token}
 durkaChatId: ${chat_id}
-durkalink: ${durka_link}
+durkaLink: ${durka_link}
 durkaChannelId: ${durka_channel_id}
