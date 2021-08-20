@@ -53,7 +53,7 @@ public class BotHandler extends com.annimon.tgbotsmodule.BotHandler {
 
             var chatId = message.getChatId();
             // leave from foreign chats
-            if (!message.isUserMessage() && (!chatId.equals(durkaChatId) || !chatId.equals(durkaChannelId))) {
+            if (!message.isUserMessage() && (!chatId.equals(durkaChatId) && !chatId.equals(durkaChannelId))) {
                 Methods.leaveChat(chatId).callAsync(this);
                 return null;
             }
