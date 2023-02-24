@@ -4,12 +4,12 @@ import com.annimon.tgbotsmodule.commands.authority.For;
 import com.annimon.tgbotsmodule.commands.context.MessageContext;
 import com.senderman.durkafeedbackbot.command.CommandExecutor;
 import com.senderman.durkafeedbackbot.service.StoryPublisherService;
+import jakarta.inject.Singleton;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.stereotype.Component;
 
 import java.util.EnumSet;
 
-@Component
+@Singleton
 public class PublishCommand implements CommandExecutor {
 
     private final StoryPublisherService storyPublisherService;

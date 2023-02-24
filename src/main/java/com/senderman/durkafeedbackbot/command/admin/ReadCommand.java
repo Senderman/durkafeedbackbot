@@ -7,12 +7,12 @@ import com.senderman.durkafeedbackbot.dbservice.FeedbackService;
 import com.senderman.durkafeedbackbot.model.Feedback;
 import com.senderman.durkafeedbackbot.util.callback.ButtonBuilder;
 import com.senderman.durkafeedbackbot.util.callback.MarkupBuilder;
+import jakarta.inject.Singleton;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.stereotype.Component;
 
 import java.util.EnumSet;
 
-@Component
+@Singleton
 public class ReadCommand implements CommandExecutor {
 
     private final FeedbackService feedbackService;

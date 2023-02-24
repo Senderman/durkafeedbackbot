@@ -6,14 +6,14 @@ import com.senderman.durkafeedbackbot.command.CommandExecutor;
 import com.senderman.durkafeedbackbot.dbservice.FeedbackService;
 import com.senderman.durkafeedbackbot.model.Feedback;
 import com.senderman.durkafeedbackbot.util.Html;
+import jakarta.inject.Singleton;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.stereotype.Component;
 
 import java.util.*;
 
 import static com.senderman.durkafeedbackbot.model.Feedback.*;
 
-@Component
+@Singleton
 public class ShowFeedbacksCommand implements CommandExecutor {
 
     private static final String feedbackSeparator = "\n\n<code>====================================</code>\n\n";

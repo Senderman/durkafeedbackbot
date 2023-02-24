@@ -2,12 +2,12 @@ package com.senderman.durkafeedbackbot.service;
 
 import com.senderman.durkafeedbackbot.util.callback.ButtonBuilder;
 import com.senderman.durkafeedbackbot.util.callback.MarkupBuilder;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
+import io.micronaut.context.annotation.Value;
+import jakarta.inject.Singleton;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
-@Service
+@Singleton
 public class MainMenu {
 
     private final String durkaLink;

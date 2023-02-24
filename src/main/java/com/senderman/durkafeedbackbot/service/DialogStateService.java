@@ -3,12 +3,12 @@ package com.senderman.durkafeedbackbot.service;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.senderman.durkafeedbackbot.util.DialogState;
+import jakarta.inject.Singleton;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.stereotype.Service;
 
 import java.time.Duration;
 
-@Service
+@Singleton
 public class DialogStateService {
 
     private final Cache<Long, DialogState> cache;

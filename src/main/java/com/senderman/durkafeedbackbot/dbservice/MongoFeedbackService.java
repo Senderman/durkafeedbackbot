@@ -2,13 +2,13 @@ package com.senderman.durkafeedbackbot.dbservice;
 
 import com.senderman.durkafeedbackbot.model.Feedback;
 import com.senderman.durkafeedbackbot.repository.FeedbackRepository;
-import org.springframework.stereotype.Service;
+import jakarta.inject.Singleton;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-@Service
+@Singleton
 public class MongoFeedbackService implements FeedbackService {
 
     private final FeedbackRepository repo;
@@ -54,7 +54,7 @@ public class MongoFeedbackService implements FeedbackService {
 
     @Override
     public Feedback insert(Feedback feedback) {
-        int id = repo.findFirstByOrderByIdDesc()
+        int id = repo.findFirstOrderByIdDesc()
                 .map(f -> f.getId() + 1)
                 .orElse(1);
 
@@ -64,7 +64,7 @@ public class MongoFeedbackService implements FeedbackService {
 
     @Override
     public Feedback update(Feedback feedback) {
-        return repo.save(feedback);
+        return repo.update(feedback);
     }
 
     @Override

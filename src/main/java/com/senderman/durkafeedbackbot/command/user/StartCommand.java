@@ -4,10 +4,10 @@ import com.annimon.tgbotsmodule.commands.context.MessageContext;
 import com.senderman.durkafeedbackbot.command.CommandExecutor;
 import com.senderman.durkafeedbackbot.service.DialogStateService;
 import com.senderman.durkafeedbackbot.service.MainMenu;
+import jakarta.inject.Singleton;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.stereotype.Component;
 
-@Component
+@Singleton
 public class StartCommand implements CommandExecutor {
 
     private final DialogStateService dialogStateService;

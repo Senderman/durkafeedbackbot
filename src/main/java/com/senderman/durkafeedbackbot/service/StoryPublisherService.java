@@ -4,10 +4,10 @@ import com.annimon.tgbotsmodule.api.methods.Methods;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import com.senderman.durkafeedbackbot.dbservice.FeedbackService;
 import com.senderman.durkafeedbackbot.model.Feedback;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
+import io.micronaut.context.annotation.Value;
+import jakarta.inject.Singleton;
 
-@Service
+@Singleton
 public class StoryPublisherService {
 
     private final FeedbackService feedbackService;

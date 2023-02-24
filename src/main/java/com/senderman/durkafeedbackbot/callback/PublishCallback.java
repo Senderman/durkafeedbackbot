@@ -3,10 +3,10 @@ package com.senderman.durkafeedbackbot.callback;
 import com.annimon.tgbotsmodule.api.methods.Methods;
 import com.annimon.tgbotsmodule.commands.context.CallbackQueryContext;
 import com.senderman.durkafeedbackbot.service.StoryPublisherService;
+import jakarta.inject.Singleton;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.stereotype.Component;
 
-@Component
+@Singleton
 public class PublishCallback implements CallbackExecutor {
 
     private final StoryPublisherService storyPublisherService;

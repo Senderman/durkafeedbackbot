@@ -4,12 +4,12 @@ import com.annimon.tgbotsmodule.commands.authority.For;
 import com.annimon.tgbotsmodule.commands.context.MessageContext;
 import com.senderman.durkafeedbackbot.command.CommandExecutor;
 import com.senderman.durkafeedbackbot.dbservice.FeedbackService;
+import jakarta.inject.Singleton;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.stereotype.Component;
 
 import java.util.EnumSet;
 
-@Component
+@Singleton
 public class DeleteFeedbackCommand implements CommandExecutor {
 
     private final FeedbackService feedbackService;

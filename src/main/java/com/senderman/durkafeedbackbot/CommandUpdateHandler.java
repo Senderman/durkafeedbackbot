@@ -6,21 +6,22 @@ import com.annimon.tgbotsmodule.commands.authority.For;
 import com.senderman.durkafeedbackbot.callback.CallbackExecutor;
 import com.senderman.durkafeedbackbot.command.CommandExecutor;
 import com.senderman.durkafeedbackbot.command.user.AnyTextCommand;
-import org.springframework.stereotype.Component;
+import io.micronaut.context.annotation.Value;
+import jakarta.inject.Singleton;
 
 import java.util.Set;
 
-@Component
+@Singleton
 public class CommandUpdateHandler extends CommandRegistry<For> {
 
     public CommandUpdateHandler(
-            BotHandler handler,
+            @Value("${username}") String username,
             Authority<For> authority,
             Set<CommandExecutor> commands,
             Set<CallbackExecutor> callbacks,
             AnyTextCommand anyTextCommand
     ) {
-        super(handler, authority);
+        super(username, authority);
         splitCallbackCommandByWhitespace();
         commands.forEach(this::register);
         callbacks.forEach(this::register);

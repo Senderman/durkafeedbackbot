@@ -4,10 +4,10 @@ import com.annimon.tgbotsmodule.commands.context.CallbackQueryContext;
 import com.senderman.durkafeedbackbot.service.DialogStateService;
 import com.senderman.durkafeedbackbot.service.MainMenu;
 import com.senderman.durkafeedbackbot.util.DialogState;
+import jakarta.inject.Singleton;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.stereotype.Component;
 
-@Component
+@Singleton
 public class QuestionCallback implements CallbackExecutor {
 
     private final DialogStateService dialogStateService;

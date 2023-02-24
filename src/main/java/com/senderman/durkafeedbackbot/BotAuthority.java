@@ -2,14 +2,16 @@ package com.senderman.durkafeedbackbot;
 
 import com.annimon.tgbotsmodule.commands.authority.Authority;
 import com.annimon.tgbotsmodule.commands.authority.For;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import com.annimon.tgbotsmodule.services.CommonAbsSender;
+import io.micronaut.context.annotation.Value;
+import jakarta.inject.Singleton;
+import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.User;
 
 import java.util.EnumSet;
 
-@Component
+@Singleton
 public class BotAuthority implements Authority<For> {
 
     private final long durkaChatId;
@@ -19,10 +21,9 @@ public class BotAuthority implements Authority<For> {
     }
 
     @Override
-    public boolean hasRights(Update update, User user, EnumSet<For> fors) {
+    public boolean hasRights(@NotNull CommonAbsSender sender, @NotNull Update update, @NotNull User user, @NotNull EnumSet<For> fors) {
         if (fors.contains(For.USER))
             return true;
-
         // All admins live in durka
         return update.getMessage().getChatId().equals(durkaChatId);
     }

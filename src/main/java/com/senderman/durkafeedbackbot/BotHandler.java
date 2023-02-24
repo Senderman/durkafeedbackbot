@@ -2,32 +2,31 @@ package com.senderman.durkafeedbackbot;
 
 import com.annimon.tgbotsmodule.analytics.UpdateHandler;
 import com.annimon.tgbotsmodule.api.methods.Methods;
+import io.micronaut.context.annotation.Value;
+import jakarta.inject.Singleton;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Lazy;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
-@SpringBootApplication
+@Singleton
 public class BotHandler extends com.annimon.tgbotsmodule.BotHandler {
 
     private final UpdateHandler updateHandler;
-    private final String token;
     private final String username;
     private final long durkaChannelId;
     private final long durkaChatId;
 
     public BotHandler(
-            @Lazy UpdateHandler updateHandler,
+            UpdateHandler updateHandler,
             @Value("${token}") String token,
             @Value("${username}") String username,
             @Value("${durkaChannelId}") long durkaChannelId,
-            @Value("${durkaChatId}") long durkaChatId) {
+            @Value("${durkaChatId}") long durkaChatId
+    ) {
+        super(token);
         this.updateHandler = updateHandler;
-        this.token = token;
         this.username = username;
         this.durkaChannelId = durkaChannelId;
         this.durkaChatId = durkaChatId;
@@ -63,7 +62,7 @@ public class BotHandler extends com.annimon.tgbotsmodule.BotHandler {
                 return null;
         }
 
-        updateHandler.handleUpdate(update);
+        updateHandler.handleUpdate(this, update);
 
         return null;
     }
@@ -71,10 +70,5 @@ public class BotHandler extends com.annimon.tgbotsmodule.BotHandler {
     @Override
     public String getBotUsername() {
         return this.username;
-    }
-
-    @Override
-    public String getBotToken() {
-        return this.token;
     }
 }

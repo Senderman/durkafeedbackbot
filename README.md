@@ -4,13 +4,15 @@
 
 ## Сборка
 
-Требования: java 18+
+Требования: java 17+
 
 ### Windows
-`gradlew.bat bootJar`
+
+`gradlew.bat shadowJar`
 
 ### Linux/MacOS
-`./gradlew bootJar`
+
+`./gradlew shadowJar`
 
 Собранный jar-файл со всеми зависимостями будет лежать в build/libs
 

@@ -11,14 +11,14 @@ import com.senderman.durkafeedbackbot.service.MainMenu;
 import com.senderman.durkafeedbackbot.util.Html;
 import com.senderman.durkafeedbackbot.util.callback.ButtonBuilder;
 import com.senderman.durkafeedbackbot.util.callback.MarkupBuilder;
+import io.micronaut.context.annotation.Value;
+import jakarta.inject.Singleton;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
 import java.util.EnumSet;
 import java.util.regex.Pattern;
 
-@Component
+@Singleton
 public class AnyTextCommand implements RegexCommand {
 
     private final MainMenu mainMenu;

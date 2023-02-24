@@ -1,15 +1,12 @@
-spring:
-  data:
-    mongodb:
-      uri: ${database}
-      database: durkabot
+micronaut:
+  application:
+    name: DurkaFeedbackBot
 
-logging:
-  level:
-    root: ERROR
+mongodb:
+  uri: ${MONGODB_URI}
 
 username: ${username}
 token: ${token}
-durkaChatId: ${chat_id}
-durkaLink: ${durka_link}
-durkaChannelId: ${durka_channel_id}
+durkaChatId: ${chat-id}
+durkaLink: ${durka-link}
+durkaChannelId: ${durka-channel-id}
