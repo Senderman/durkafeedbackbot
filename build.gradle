@@ -31,6 +31,10 @@ application {
     mainClass.set("com.senderman.durkafeedbackbot.DurkaFeedbackBot")
 }
 
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
 java {
     sourceCompatibility = JavaVersion.toVersion("17")
     targetCompatibility = JavaVersion.toVersion("17")
