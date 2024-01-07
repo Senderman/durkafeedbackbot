@@ -9,11 +9,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Singleton
-public class MongoFeedbackService implements FeedbackService {
+public class H2FeedbackService implements FeedbackService {
 
     private final FeedbackRepository repo;
 
-    public MongoFeedbackService(FeedbackRepository repo) {
+    public H2FeedbackService(FeedbackRepository repo) {
         this.repo = repo;
     }
 
