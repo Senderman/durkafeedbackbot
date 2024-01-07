@@ -3,24 +3,33 @@ package com.senderman.durkafeedbackbot.model;
 import io.micronaut.core.annotation.Creator;
 import io.micronaut.data.annotation.Id;
 import io.micronaut.data.annotation.MappedEntity;
+import io.micronaut.data.annotation.MappedProperty;
 
 import java.util.Objects;
 
-@MappedEntity("feedback")
+@MappedEntity("FEEDBACK")
 public class Feedback {
 
     public static final String TYPE_QUESTION = "Вопрос";
     public static final String TYPE_TRUE_STORY = "История";
     public static final String TYPE_TOPIC_REQUEST = "Предложение темы";
 
-    @Id
-    private int id;
+    @MappedProperty("message")
     private final String message;
+    @MappedProperty("type")
     private final String type;
+    @MappedProperty("user_id")
     private final long userId;
+    @MappedProperty("user_name")
     private final String userName;
+    @MappedProperty("chat_id")
     private final long chatId;
+    @MappedProperty("message_id")
     private final int messageId;
+    @Id
+    @MappedProperty("id")
+    private int id;
+    @MappedProperty("replied")
     private boolean isReplied;
 
     @Creator
