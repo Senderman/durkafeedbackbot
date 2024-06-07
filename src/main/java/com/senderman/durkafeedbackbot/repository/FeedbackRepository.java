@@ -9,7 +9,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-@JdbcRepository(dialect = Dialect.H2)
+@JdbcRepository(dialect = Dialect.POSTGRES)
 public interface FeedbackRepository extends CrudRepository<Feedback, Integer> {
 
     Optional<Feedback> findFirstOrderByIdDesc();
