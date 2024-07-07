@@ -21,3 +21,4 @@ token: ${token}
 durkaChatId: ${chat-id}
 durkaLink: ${durka-link}
 durkaChannelId: ${durka-channel-id}
+privacyPolicyLink: https://telegra.ph/Srobofactory-Privacy-Policy-07-07 # link to bot's privacy policy
