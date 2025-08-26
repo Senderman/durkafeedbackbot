@@ -6,24 +6,24 @@ public abstract class ButtonBuilder {
 
     protected final InlineKeyboardButton button;
 
-    protected ButtonBuilder() {
-        this.button = new InlineKeyboardButton();
+    protected ButtonBuilder(String text) {
+        this.button = new InlineKeyboardButton(text);
     }
 
-    public static ButtonBuilder callbackButton() {
-        return new CallbackButtonBuilder();
+    public static ButtonBuilder callbackButton(String text) {
+        return new CallbackButtonBuilder(text);
     }
 
-    public static ButtonBuilder urlButton() {
-        return new UrlButtonBuilder();
+    public static ButtonBuilder urlButton(String text) {
+        return new UrlButtonBuilder(text);
     }
 
-    public static ButtonBuilder switchInlineQueryButton() {
-        return new SwitchInlineQueryButtonBuilder();
+    public static ButtonBuilder switchInlineQueryButton(String text) {
+        return new SwitchInlineQueryButtonBuilder(text);
     }
 
-    public static ButtonBuilder switchInlineQueryCurrentChatButton() {
-        return new SwitchInlineQueryCurrentChatButtonBuilder();
+    public static ButtonBuilder switchInlineQueryCurrentChatButton(String text) {
+        return new SwitchInlineQueryCurrentChatButtonBuilder(text);
     }
 
     public ButtonBuilder text(String text) {
@@ -39,6 +39,10 @@ public abstract class ButtonBuilder {
 
     private static class CallbackButtonBuilder extends ButtonBuilder {
 
+        protected CallbackButtonBuilder(String text) {
+            super(text);
+        }
+
         @Override
         public ButtonBuilder payload(String payload) {
             button.setCallbackData(payload);
@@ -47,6 +51,10 @@ public abstract class ButtonBuilder {
     }
 
     private static class UrlButtonBuilder extends ButtonBuilder {
+
+        protected UrlButtonBuilder(String text) {
+            super(text);
+        }
 
         @Override
         public ButtonBuilder payload(String payload) {
@@ -58,6 +66,10 @@ public abstract class ButtonBuilder {
     private static class SwitchInlineQueryButtonBuilder extends ButtonBuilder {
 
 
+        protected SwitchInlineQueryButtonBuilder(String text) {
+            super(text);
+        }
+
         @Override
         public ButtonBuilder payload(String payload) {
             button.setSwitchInlineQuery(payload);
@@ -66,6 +78,10 @@ public abstract class ButtonBuilder {
     }
 
     private static class SwitchInlineQueryCurrentChatButtonBuilder extends ButtonBuilder {
+
+        protected SwitchInlineQueryCurrentChatButtonBuilder(String text) {
+            super(text);
+        }
 
         @Override
         public ButtonBuilder payload(String payload) {

@@ -55,14 +55,14 @@ public class ReadCommand implements CommandExecutor {
                 <b>Автор:</b> %s
                 <b>Тип:</b> %s
                 <b>Отвечен:</b> %s
-                                
+                
                 %s
                 """.formatted(id, f.getUserName(), f.getType(), f.isReplied() ? "✅" : "❌", f.getMessage());
         var m = context.replyToMessage(text);
         if (f.getType().equals(Feedback.TYPE_TRUE_STORY)) {
-            m.setReplyMarkup(new MarkupBuilder().addButton(ButtonBuilder.callbackButton()
+            m.setReplyMarkup(new MarkupBuilder().addButton(ButtonBuilder.callbackButton("Опубликовать")
                             .payload("c_publish " + id)
-                            .text("Опубликовать"))
+                    )
                     .build());
         }
         m.callAsync(context.sender);

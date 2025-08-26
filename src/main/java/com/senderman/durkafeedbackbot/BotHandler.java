@@ -1,11 +1,12 @@
 package com.senderman.durkafeedbackbot;
 
+import com.annimon.tgbotsmodule.BotModuleOptions;
 import com.annimon.tgbotsmodule.analytics.UpdateHandler;
 import com.annimon.tgbotsmodule.api.methods.Methods;
-import io.micronaut.context.annotation.Value;
+import com.senderman.durkafeedbackbot.config.BotConfig;
 import jakarta.inject.Singleton;
 import org.jetbrains.annotations.NotNull;
-import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
+import org.telegram.telegrambots.meta.api.methods.botapimethods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -13,23 +14,18 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 @Singleton
 public class BotHandler extends com.annimon.tgbotsmodule.BotHandler {
 
+    private final BotConfig config;
     private final UpdateHandler updateHandler;
-    private final String username;
-    private final long durkaChannelId;
-    private final long durkaChatId;
+
 
     public BotHandler(
+            BotConfig config,
             UpdateHandler updateHandler,
-            @Value("${token}") String token,
-            @Value("${username}") String username,
-            @Value("${durkaChannelId}") long durkaChannelId,
-            @Value("${durkaChatId}") long durkaChatId
+            BotModuleOptions botOptions
     ) {
-        super(token);
+        super(botOptions);
+        this.config = config;
         this.updateHandler = updateHandler;
-        this.username = username;
-        this.durkaChannelId = durkaChannelId;
-        this.durkaChatId = durkaChatId;
 
         addMethodPreprocessor(EditMessageText.class, m -> {
             m.enableHtml(true);
@@ -52,23 +48,18 @@ public class BotHandler extends com.annimon.tgbotsmodule.BotHandler {
 
             var chatId = message.getChatId();
             // leave from foreign chats
-            if (!message.isUserMessage() && (!chatId.equals(durkaChatId) && !chatId.equals(durkaChannelId))) {
+            if (!message.isUserMessage() && (!chatId.equals(config.durkaChatId()) && !chatId.equals(config.durkaChannelId()))) {
                 Methods.leaveChat(chatId).callAsync(this);
                 return null;
             }
 
             // skip non-commands in admin chat
-            if (chatId.equals(durkaChatId) && !message.isCommand())
+            if (chatId.equals(config.durkaChatId()) && !message.isCommand())
                 return null;
         }
 
         updateHandler.handleUpdate(this, update);
 
         return null;
-    }
-
-    @Override
-    public String getBotUsername() {
-        return this.username;
     }
 }

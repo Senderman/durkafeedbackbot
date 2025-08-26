@@ -2,6 +2,7 @@ package com.senderman.durkafeedbackbot.util.callback;
 
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardRow;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,8 +12,8 @@ import java.util.List;
  */
 public class MarkupBuilder {
 
-    private final List<List<InlineKeyboardButton>> keyboard;
-    private List<InlineKeyboardButton> currentRow;
+    private final List<InlineKeyboardRow> keyboard;
+    private InlineKeyboardRow currentRow;
 
     public MarkupBuilder() {
         keyboard = new ArrayList<>();
@@ -32,15 +33,13 @@ public class MarkupBuilder {
 
     // Создать новый ряд и переключиться на него
     public MarkupBuilder newRow() {
-        currentRow = new ArrayList<>();
+        currentRow = new InlineKeyboardRow();
         keyboard.add(currentRow);
         return this;
     }
 
     public InlineKeyboardMarkup build() {
-        var markup = new InlineKeyboardMarkup();
-        markup.setKeyboard(keyboard);
-        return markup;
+        return new InlineKeyboardMarkup(keyboard);
     }
 
 }

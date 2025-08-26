@@ -1,6 +1,22 @@
 micronaut:
   application:
     name: DurkaFeedbackBot
+  server:
+    port: 8080
+  metrics:
+    enabled: true
+    export:
+      prometheus:
+        enabled: true
+        step: PT1M
+        descriptions: true
+
+endpoints:
+  prometheus:
+    sensitive: false
+  health:
+    enabled: true
+    sensitive: false
 
 datasources:
   default:
@@ -16,9 +32,9 @@ flyway:
     default:
       enabled: true
 
-username: ${username}
-token: ${token}
-durkaChatId: ${chat-id}
-durkaLink: ${durka-link}
-durkaChannelId: ${durka-channel-id}
-privacyPolicyLink: https://telegra.ph/Srobofactory-Privacy-Policy-07-07 # link to bot's privacy policy
+bot:
+  username: ${BOT_USERNAME}
+  token: ${BOT_TOKEN}
+  durkaChatId: ${DURKA_CHAT_ID}
+  durkaLink: ${DURKA_LINK}
+  durkaChannelId: ${DURKA_CHANNEL_ID}

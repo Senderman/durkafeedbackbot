@@ -2,9 +2,9 @@ package com.senderman.durkafeedbackbot.service;
 
 import com.annimon.tgbotsmodule.api.methods.Methods;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
+import com.senderman.durkafeedbackbot.config.BotConfig;
 import com.senderman.durkafeedbackbot.dbservice.FeedbackService;
 import com.senderman.durkafeedbackbot.model.Feedback;
-import io.micronaut.context.annotation.Value;
 import jakarta.inject.Singleton;
 
 @Singleton
@@ -13,9 +13,9 @@ public class StoryPublisherService {
     private final FeedbackService feedbackService;
     private final long durkaChannelId;
 
-    public StoryPublisherService(FeedbackService feedbackService, @Value("${durkaChannelId}") long durkaChannelId) {
+    public StoryPublisherService(FeedbackService feedbackService, BotConfig config) {
         this.feedbackService = feedbackService;
-        this.durkaChannelId = durkaChannelId;
+        this.durkaChannelId = config.durkaChannelId();
     }
 
     public void publish(int id, long issueChatId, CommonAbsSender sender) throws StoryNotFoundException, NotAStoryException {

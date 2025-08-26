@@ -6,7 +6,7 @@ import com.annimon.tgbotsmodule.commands.authority.For;
 import com.senderman.durkafeedbackbot.callback.CallbackExecutor;
 import com.senderman.durkafeedbackbot.command.CommandExecutor;
 import com.senderman.durkafeedbackbot.command.user.AnyTextCommand;
-import io.micronaut.context.annotation.Value;
+import com.senderman.durkafeedbackbot.config.BotConfig;
 import jakarta.inject.Singleton;
 
 import java.util.Set;
@@ -15,13 +15,13 @@ import java.util.Set;
 public class CommandUpdateHandler extends CommandRegistry<For> {
 
     public CommandUpdateHandler(
-            @Value("${username}") String username,
+            BotConfig config,
             Authority<For> authority,
             Set<CommandExecutor> commands,
             Set<CallbackExecutor> callbacks,
             AnyTextCommand anyTextCommand
     ) {
-        super(username, authority);
+        super(config.username(), authority);
         splitCallbackCommandByWhitespace();
         commands.forEach(this::register);
         callbacks.forEach(this::register);

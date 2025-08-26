@@ -1,8 +1,8 @@
 package com.senderman.durkafeedbackbot.service;
 
+import com.senderman.durkafeedbackbot.config.BotConfig;
 import com.senderman.durkafeedbackbot.util.callback.ButtonBuilder;
 import com.senderman.durkafeedbackbot.util.callback.MarkupBuilder;
-import io.micronaut.context.annotation.Value;
 import jakarta.inject.Singleton;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
@@ -12,8 +12,8 @@ public class MainMenu {
 
     private final String durkaLink;
 
-    public MainMenu(@Value("${durkaLink}") String durkaLink) {
-        this.durkaLink = durkaLink;
+    public MainMenu(BotConfig config) {
+        this.durkaLink = config.durkaLink();
     }
 
     public InlineKeyboardButton goToMainMenuButton() {
@@ -31,21 +31,21 @@ public class MainMenu {
 
     public InlineKeyboardMarkup mainMenuMarkup() {
         return new MarkupBuilder()
-                .addButton(ButtonBuilder.callbackButton()
+                .addButton(ButtonBuilder.callbackButton("Задать вопрос")
                         .payload("c_question")
-                        .text("Задать вопрос"))
+                )
                 .newRow()
-                .addButton(ButtonBuilder.urlButton()
+                .addButton(ButtonBuilder.urlButton("Чат канала")
                         .payload(durkaLink)
-                        .text("Чат канала"))
+                )
                 .newRow()
-                .addButton(ButtonBuilder.callbackButton()
+                .addButton(ButtonBuilder.callbackButton("Предложить тему для будущих постов")
                         .payload("c_topic_request")
-                        .text("Предложить тему для будущих постов"))
+                )
                 .newRow()
-                .addButton(ButtonBuilder.callbackButton()
+                .addButton(ButtonBuilder.callbackButton("Рассказать свою историю")
                         .payload("c_true_story")
-                        .text("Рассказать свою историю"))
+                )
                 .build();
     }
 }

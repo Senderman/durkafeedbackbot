@@ -4,6 +4,7 @@ import com.annimon.tgbotsmodule.api.methods.Methods;
 import com.annimon.tgbotsmodule.commands.RegexCommand;
 import com.annimon.tgbotsmodule.commands.authority.For;
 import com.annimon.tgbotsmodule.commands.context.RegexMessageContext;
+import com.senderman.durkafeedbackbot.config.BotConfig;
 import com.senderman.durkafeedbackbot.dbservice.FeedbackService;
 import com.senderman.durkafeedbackbot.model.Feedback;
 import com.senderman.durkafeedbackbot.service.DialogStateService;
@@ -11,7 +12,6 @@ import com.senderman.durkafeedbackbot.service.MainMenu;
 import com.senderman.durkafeedbackbot.util.Html;
 import com.senderman.durkafeedbackbot.util.callback.ButtonBuilder;
 import com.senderman.durkafeedbackbot.util.callback.MarkupBuilder;
-import io.micronaut.context.annotation.Value;
 import jakarta.inject.Singleton;
 import org.jetbrains.annotations.NotNull;
 
@@ -30,12 +30,12 @@ public class AnyTextCommand implements RegexCommand {
             MainMenu mainMenu,
             FeedbackService feedbackService,
             DialogStateService dialogStateService,
-            @Value("${durkaChatId}") long durkaChatId
+            BotConfig config
     ) {
         this.mainMenu = mainMenu;
         this.feedbackService = feedbackService;
         this.dialogStateService = dialogStateService;
-        this.durkaChatId = durkaChatId;
+        this.durkaChatId = config.durkaChatId();
     }
 
     @Override
@@ -86,21 +86,21 @@ public class AnyTextCommand implements RegexCommand {
         var userLink = Html.getUserLink(user);
         var textForAdmins = """
                 🔔 <b>Фидбек #%d</b>
-                                
+                
                 Тип: <b>%s</b>
                 От: %s
-                                
+                
                 %s
-                                
+                
                 Для ответа, введите /fresp %d &lt;ваш ответ&gt;
                 Для удаления - /fdel %d
                 """
                 .formatted(feedbackId, feedbackType, userLink, feedbackText, feedbackId, feedbackId);
         var m = Methods.sendMessage(durkaChatId, textForAdmins);
         if (feedbackType.equals(Feedback.TYPE_TRUE_STORY)) {
-            m.setReplyMarkup(new MarkupBuilder().addButton(ButtonBuilder.callbackButton()
+            m.setReplyMarkup(new MarkupBuilder().addButton(ButtonBuilder.callbackButton("Опубликовать")
                             .payload("c_publish " + feedbackId)
-                            .text("Опубликовать"))
+                    )
                     .build());
         }
         m.callAsync(context.sender);
